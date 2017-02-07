@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - bank_roll@localhost" uuid="8b336fc6-86b7-4815-8c62-2aa28deb00cd">
+    <database-info product="MySQL" version="5.7.16-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="bank_roll"/>
+    <table name="customers" schema="" catalog="bank_roll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="adress" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="number_of_projects" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="finished_projects" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_cust_proj" table="projects" schema="" catalog="bank_roll" columns="customer_id"/>
+      <index name="idcustomers_UNIQUE" unique="true" columns="id"/>
+    </table>
+    <table name="projects" schema="" catalog="bank_roll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date_begin" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="date_planned_finish" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="date_finish" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="project_seccess" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="customer_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_cust_proj" columns="customer_id" ref-table="customers" ref-schema="" ref-catalog="bank_roll" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="id_UNIQUE" unique="true" columns="id"/>
+      <index name="FK_cust_proj_idx" unique="false" columns="customer_id"/>
+    </table>
+    <table name="users" schema="" catalog="bank_roll" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="second_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="middle_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="login" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12"/>
+      <column name="role" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+  </data-source>
+</component>
