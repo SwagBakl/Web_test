@@ -94,6 +94,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>CustomerAddServlet</servlet-name>
+        <servlet-class>web.CustomerAddServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomerAddServlet</servlet-name>
+        <url-pattern>/customer_add.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ProjectListServlet</servlet-name>
         <servlet-class>web.ProjectListServlet</servlet-class>
     </servlet>
@@ -102,6 +111,41 @@
         <url-pattern>/Projects/projectTable.html</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ProjectEditServlet</servlet-name>
+        <servlet-class>web.ProjectEditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProjectEditServlet</servlet-name>
+        <url-pattern>/Projects/project_edit.html</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ProjectSaveServlet</servlet-name>
+        <servlet-class>web.ProjectSaveServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProjectSaveServlet</servlet-name>
+        <url-pattern>/Projects/project_save.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProjectDeleteServlet</servlet-name>
+        <servlet-class>web.ProjectDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProjectDeleteServlet</servlet-name>
+        <url-pattern>/Projects/project_delete.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProjectAddServlet</servlet-name>
+        <servlet-class>web.ProjectAddServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProjectAddServlet</servlet-name>
+        <url-pattern>/Projects/project_add.html</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>ManagerPageServlet</servlet-name>
         <servlet-class>web.ManagerPageServlet</servlet-class>
@@ -129,6 +173,7 @@
         <url-pattern>/logout.html</url-pattern>
     </servlet-mapping>
 
+
     <filter>
         <filter-name>SecurityFilter</filter-name>
         <filter-class>web.SecurityFilter</filter-class>
@@ -136,7 +181,7 @@
             <param-name>secure-urls-pattern</param-name>
             <param-value>(.*index\.html)|(.*edit\.html)|(.*logout\.html)|(.*customerTable.html)|
                 (.*projectTable.html)|(.*manager_page.html) | (.*customer_save.html) | (.*customer_edit.html)|
-                (.*customer_delete.html)|(.*add_user.html)(\/)</param-value>
+                (.*customer_delete.html)|(.*add_user.html) | (.*project_edit.html) | (.*customer_add.html)(\/)</param-value>
         </init-param>
     </filter>
     <filter-mapping>

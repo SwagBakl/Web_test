@@ -13,6 +13,7 @@
 <html>
 <head>
     <title>Manager</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
 <c:url var="logoutUrl" value="/logout.html"/>

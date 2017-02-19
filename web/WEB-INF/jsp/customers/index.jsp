@@ -52,6 +52,8 @@
     </TR>
   </c:forEach>
 </TABLE>
+<c:url var="addCustomerUrl" value="/customer_add.html"/>
+<A href="${addCustomerUrl}">Add customer</A>
 <c:url var="manager_pageUrl" value="/manager_page.html"/>
 <A href="${manager_pageUrl}">back</A>
 </BODY>

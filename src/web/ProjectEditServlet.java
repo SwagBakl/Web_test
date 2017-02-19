@@ -1,7 +1,10 @@
 package web;
 
 import db.CustomerStorage;
+import db.ProjectStorage;
 import db.StorageCreator;
+import domain.Customer;
+import domain.Project;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,22 +16,22 @@ import java.sql.SQLException;
 /**
  * Created by Денис on 07.02.2017.
  */
-public class CustomerDeleteServlet extends HttpServlet{
+public class ProjectEditServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-
-        req.setCharacterEncoding("UTF-8");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         Integer id = null;
+
         try{
             id = Integer.parseInt(req.getParameter("id"));
         }catch (NumberFormatException e){}
-        if(id !=null){
+        if(id != null){
             StorageCreator storageCreator = null;
-            try{
+            try {
                 storageCreator = new StorageCreator();
-                CustomerStorage s = storageCreator.newCustomerStorage();
-                s.delete(id);
+                ProjectStorage s = storageCreator.newProjectStorage();
+                Project project = s.findById(id);
+                req.setAttribute("project", project);
 
             }catch (SQLException e){
                 throw new ServletException(e);
@@ -39,6 +42,7 @@ public class CustomerDeleteServlet extends HttpServlet{
                 }
             }
         }
-        resp.sendRedirect(req.getContextPath()+ "/customers/customerTable.html");
+        getServletContext().getRequestDispatcher("/WEB-INF/jsp/Projects/project_edit.jsp").forward(req, resp);
     }
+
 }

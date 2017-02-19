@@ -181,8 +181,7 @@ public class UserStorage extends BasicStorage {
         }
     }
 
-    public void save(User user) throws SQLException {
-        //update(user);
+    public void save(User user) throws SQLException{
         if(user.getId() != 0) {
             update(user);
         } else {

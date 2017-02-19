@@ -10,6 +10,7 @@
 <HEAD>
   <META http-equiv="Content-Type"
         content="text/html; charset=UTF-8">
+
   <TITLE>Users</TITLE>
   <STYLE>
     TABLE {
@@ -19,6 +20,7 @@
       border: 1px solid black;
       padding: 5px 30px 5px 10px;
     }
+
   </STYLE>
 </HEAD>
 <BODY>

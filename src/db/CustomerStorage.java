@@ -1,6 +1,7 @@
 package db;
 
 import domain.Customer;
+import domain.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -92,88 +93,82 @@ public class CustomerStorage extends BasicStorage {
         return customer;
     }
 
-    public Integer insert(Customer customer) throws SQLException{
-        String sql = "INSERT INTO `customers` (`name`, `adress`, `number_of_projects`, `finished_projects`) values(?, ?, ?, ?)";
-        Connection connection = getConnection();
-        PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
+    public Integer create(Customer customer) throws SQLException {
+        String sql = "INSERT INTO `customers`(`name`, `adress`, `number_of_projects`, `finished_projects`) VALUES (?, ?, ?, ?)";
+        Connection c = getConnection();
+        PreparedStatement s = null;
+        ResultSet r = null;
         try {
-            preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, customer.getName());
-            preparedStatement.setString(2, customer.getAdress());
-            preparedStatement.setInt(3, customer.getNumber_of_projects());
-            preparedStatement.setInt(4, customer.getFinished_projects());
-            preparedStatement.executeUpdate();
-            rs = preparedStatement.getGeneratedKeys();
+            s = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            s.setString(1, customer.getName());
+            s.setString(2, customer.getAdress());
+            s.setInt(3, customer.getNumber_of_projects());
+            s.setInt(4, customer.getFinished_projects());
+            s.executeUpdate();
+            r = s.getGeneratedKeys();
             Integer id = null;
-            if(rs.next()){
-                id = rs.getInt(1);
+            if(r.next()) {
+                id = r.getInt(1);
             }
-            connection.commit();
+            c.commit();
             return id;
-        }catch(SQLException e) {
-            try { connection.rollback(); } catch(SQLException e1) {}
+        } catch(SQLException e) {
+            try { c.rollback(); } catch(SQLException e1) {}
             throw e;
         } finally {
-            try { rs.close(); } catch(NullPointerException | SQLException e) {}
-            try { preparedStatement.close(); } catch(NullPointerException | SQLException e) {}
+            try { r.close(); } catch(NullPointerException | SQLException e) {}
+            try { s.close(); } catch(NullPointerException | SQLException e) {}
         }
     }
 
     public void update(Customer customer) throws SQLException {
-        String sql = "UPDATE customers SET `name`= ?, `adress`= ?, `number_of_projects`= ?, `finished_projects`= ? WHERE `id` = ?";
-        Connection connection = getConnection();
-        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE `customers` SET `name` = ?, `adress` = ?, `number_of_projects`=?, `finished_projects` = ? WHERE `id` = ?";
+        Connection c = getConnection();
+        PreparedStatement s = null;
         try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, customer.getName());
-            preparedStatement.setString(2, customer.getAdress());
-            preparedStatement.setInt(3, customer.getNumber_of_projects());
-            preparedStatement.setInt(4, customer.getFinished_projects());
-            preparedStatement.setInt(5, customer.getId());
-            preparedStatement.executeUpdate();
-            connection.commit();
-        } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-            }
+            s = c.prepareStatement(sql);
+            s.setString(1, customer.getName());
+            s.setString(2, customer.getAdress());
+            s.setInt(3, customer.getNumber_of_projects());
+            s.setInt(4, customer.getFinished_projects());
+            s.executeUpdate();
+            c.commit();
+        } catch(SQLException e) {
+            try { c.rollback(); } catch(SQLException e1) {}
             throw e;
         } finally {
-            try {
-                preparedStatement.close();
-            } catch (NullPointerException | SQLException e) {
-            }
+            try { s.close(); } catch(NullPointerException | SQLException e) {}
         }
     }
 
-    public void  save(Customer customer) throws SQLException {
-        if (customer.getId() != 0) {
+    public void save(Customer customer) throws SQLException{
+        if(customer.getId() != 0) {
             update(customer);
-        }else {
-            Integer id = insert(customer);
+        } else {
+            Integer id = create(customer);
             customer.setId(id);
         }
     }
 
-    public void delete(Integer id) throws SQLException{
-
-        String sql = "DELETE FROM `customers` WHERE `id`=?";
-        Connection connection = getConnection();
-        PreparedStatement ps = null;
+    public void delete(Integer id) throws SQLException {
+        String sql = "DELETE FROM `customers` WHERE `id` = ?";
+        Connection c = getConnection();
+        PreparedStatement s = null;
         try {
-            ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.executeUpdate();
-            connection.commit();
-        }catch(SQLException e) {
-            try { connection.rollback(); } catch(SQLException e1) {}
+            s = c.prepareStatement(sql);
+            s.setInt(1, id);
+            s.executeUpdate();
+            c.commit();
+        } catch(SQLException e) {
+            try { c.rollback(); } catch(SQLException e1) {}
             throw e;
         } finally {
-            try { ps.close(); } catch(NullPointerException | SQLException e) {}
+            try { s.close(); } catch(NullPointerException | SQLException e) {}
         }
-
     }
+
+
 
 
 }

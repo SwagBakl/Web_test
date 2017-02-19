@@ -32,7 +32,6 @@
 <P style="text-align: right">You are signed in as ${user.login}<BR><A href="${logoutUrl}">Logout</A></P>
 <TABLE>
   <TR>
-    <TH>ID</TH>
     <TH>Name</TH>
     <TH>Date_begin</TH>
     <TH>Date_planned_finish</TH>
@@ -42,12 +41,12 @@
   </TR>
   <c:forEach var="project" items="${projects}">
     <TR>
-      <TD>
-        <fmt:formatNumber value="${project.id}"/>
-      </TD>
+        <c:url var="editUrl" value="/Projects/project_edit.html">
+        <c:param name="id" value="${project.id}"/>
+        </c:url>
 
       <TD>
-          ${project.name}
+          <A href="${editUrl}">${project.name}</A>
       </TD>
       <TD>
         <fmt:formatDate value="${project.date_begin}"/>
@@ -60,8 +59,8 @@
       </TD>
       <TD>
         <c:choose>
-          <c:when test="${project.project_seccess}">Yes</c:when>
-          <c:otherwise>No</c:otherwise>
+          <c:when test="${project.project_seccess == 'yes'}">YES</c:when>
+          <c:when test="${project.project_seccess == 'no'}">NO</c:when>
         </c:choose>
       </TD>
       <TD>
@@ -70,6 +69,8 @@
     </TR>
   </c:forEach>
 </TABLE>
+<c:url var="addProjectUrl" value="/Projects/project_add.html"/>
+<a href="${addProjectUrl}">Add project</a>
 <c:url var="manager_pageUrl" value="/manager_page.html"/>
 <A href="${manager_pageUrl}">back</A>
 </BODY>

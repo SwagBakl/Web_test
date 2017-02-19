@@ -9,6 +9,7 @@ public class StorageCreator {
     private ContactStorage contactStorage;*/
     private UserStorage userStorage;
     private CustomerStorage customerStorage;
+    private ProjectStorage projectStorage;
 
     public StorageCreator() throws SQLException {
         connection = Connector.getConnection();
@@ -29,6 +30,14 @@ public class StorageCreator {
        }
        return customerStorage;
    }
+
+    public ProjectStorage newProjectStorage() {
+        if(projectStorage == null){
+            projectStorage = new ProjectStorage();
+            projectStorage.setConnection(connection);
+        }
+        return projectStorage;
+    }
 
 
 

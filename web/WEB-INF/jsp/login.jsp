@@ -5,6 +5,8 @@
 <HEAD>
   <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <TITLE>Вход в систему</TITLE>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+
 </HEAD>
 <BODY>
 <c:if test="${not empty error}">

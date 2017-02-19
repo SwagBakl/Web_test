@@ -37,7 +37,7 @@
   <c:url var="saveUrl" value="/save.html"/>
   <FORM action="${saveUrl}" method="post">
     <c:if test="${not empty user.id}">
-      <INPUT type="hidden" name="id" value="${user.id}">
+      <INPUT type="text" name="id" value="${user.id}">
     </c:if>
     Имя:<BR>
     <INPUT type="text" name="name" value="${user.name}"><BR>
